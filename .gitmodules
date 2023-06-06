@@ -1,0 +1,3 @@
+[submodule "p4lang_tutorials"]
+	path = p4lang_tutorials
+	url = git@github.com:p4lang/tutorials.git
