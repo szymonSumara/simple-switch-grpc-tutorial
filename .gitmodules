@@ -4,3 +4,6 @@
 [submodule "p4lang_behavioral_model"]
 	path = p4lang_behavioral_model
 	url = git@github.com:p4lang/behavioral-model.git
+[submodule "p4lang_ptf"]
+	path = p4lang_ptf
+	url = git@github.com:p4lang/ptf.git
