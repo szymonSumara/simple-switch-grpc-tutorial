@@ -7,3 +7,6 @@
 [submodule "p4lang_ptf"]
 	path = p4lang_ptf
 	url = git@github.com:p4lang/ptf.git
+[submodule "p4lang_p4runtime_shell"]
+	path = p4lang_p4runtime_shell
+	url = git@github.com:p4lang/p4runtime-shell.git
