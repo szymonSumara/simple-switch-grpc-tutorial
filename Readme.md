@@ -30,3 +30,9 @@ Usunięcie maszyny
 ```
 vagrant destroy
 ```
+
+
+## Do aktualizacji submodułów
+```sh
+git submodule update --remote
+```
