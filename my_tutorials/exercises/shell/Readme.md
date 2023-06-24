@@ -229,7 +229,7 @@ h3 -> h1 h2
 
 ```
 
-## Całość
+## Dziłające rozwiązanie
 
 ```sh
 
