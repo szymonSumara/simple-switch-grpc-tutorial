@@ -8,17 +8,24 @@ a następnie naprawa błędów poprzez dodanie wpisu do tabeli za pomocą P4Runt
 
 ## Krok 1: Kompilacja i uruchomienie sieci mininet
 
-1. W terminalu:
+W tym kroku chcemy:
+* skompilować `basic.p4`,
+* uruchomić triangle-topo w Mininet z konfiguracją switchy
+i wszystkich hostów wylistowanych w
+   [triangle-topo/topology.json](./triangle-topo/topology.json)
+
+W tym celu:
+1. Tworzymy potrzebne katalogi: `mkdir -p build pcaps logs`
+2. Kompilujemy nasz program P4: `p4c-bm2-ss --p4v 16 --p4runtime-files build/basic.p4.p4info.txt -o build/basic.json basic.p4` 
+3. Uruchamiamy wszystko poprzez `sudo python3 ../../utils/run_exercise.py -t triangle-topo/topology.json -j build/basic.json -b simple_switch_grpc`
+
+4. W kolejnych krokach będzimy używać polecenia
    ```bash
    make
    ```
-   Powoduje to:
-   * kompilacje `basic.p4`,
-   * uruchomienie triangle-topo w Mininet i konfiguracje switchy
-   the appropriate P4 program + table entries, and
-   * konfiguracje wszystkich hostów wylistowanych
-   [triangle-topo/topology.json](./triangle-topo/topology.json)
-## Krok 2: Sprawdzenie działania
+   co odpowiada wykonaniu powyższych kroków.
+
+## Krok 2: Sprawdzenie komunikacji
 Poleceniem `pingall` sprawdzamy komunikację pomiędzy wszystkimi hostami
 ```sh
 mininet> pingall
@@ -31,9 +38,10 @@ mininet>
 ```
 Jak widać z outputu powyższej komendy komunikacja pomiędzy hostem h1 i h2 nie działa. W kolejnych krokach spróbujemy to naprawić.
 
+
 ## Krok 3: Analiza tablic routingu 
 
-Analizując pliki zawarte w [triangle-topo/topology.json](./triangle-topo/topology.json), należy znaleźć brakujący wpis w tablicy routingu jednego z urządzeń
+Analizując pliki zawarte w [triangle-topo/topology.json](./triangle-topo/topology.json), należy znaleźć brakujący wpis w tablicy routingu jednego z urządzeń.
 
 ## Krok 4: Dodanie brakującego wpisu
 W pliku [mycontroller.py](./mycontroller.py) uzupełniamy funkcję writeTableEntry:
@@ -49,7 +57,7 @@ W pliku [mycontroller.py](./mycontroller.py) uzupełniamy funkcję writeTableEnt
                            "port": port
                         }
 
-    2. Uzupełniamy arfumenty wywałania funkcji
+    2. Uzupełniamy argumenty wywałania funkcji
 
 ## Krok 5: Uruchomienie kontrolera
 Komendą `sudo ./mycontroller.py` uruchamiamy nasz kontroler.
@@ -75,3 +83,4 @@ h3 -> h1 h2
 *** Results: 0% dropped (6/6 received)
 mininet> 
 ```
+Wszystko działa!!!
