@@ -16,12 +16,18 @@ import p4runtime_lib.helper
 from p4runtime_lib.error_utils import printGrpcError
 from p4runtime_lib.switch import ShutdownAllSwitchConnections
 
-
 def writeTableEntry(p4info_helper, switch, port, dst_eth_addr, dst_ip_addr):
 
     table_entry = p4info_helper.buildTableEntry(
-                #TODO Add table entry
-                )
+        table_name="MyIngress.ipv4_lpm",
+        match_fields={
+            "hdr.ipv4.dstAddr": (dst_ip_addr, 32)
+        },
+        action_name="MyIngress.ipv4_forward",
+        action_params={
+            "dstAddr": dst_eth_addr,
+            "port": port
+        })
 
     switch.WriteTableEntry(table_entry)
     print("Added table entry on %s" % switch.name)
@@ -70,17 +76,8 @@ def main(p4info_file_path):
         # master (required by P4Runtime before performing any other write operation)
         s1.MasterArbitrationUpdate()
         
-        # TODO
-        # Fill proper table entry
-        writeTableEntry(p4info_helper,
-                         switch=s1,
-                         port=#???,
-                         dst_eth_addr=#???,
-                         dst_ip_addr=#???
-                        )
-
-        readTableRules(p4info_helper, s1)
-
+        writeTableEntry(p4info_helper, switch=s1, port=2, dst_eth_addr="08:00:00:00:02:22", dst_ip_addr="10.0.2.2")
+        
         readTableRules(p4info_helper, s1)        
         
     except KeyboardInterrupt:
