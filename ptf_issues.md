@@ -802,6 +802,8 @@ p4-hlir only supports the P4_14 version of the P4 programming language. If you n
 2. To jest na 14 wersję języka bez planow wsparcia 14 (bo to robi P4C)
 
 
+Tylko co ciekawe: ptf wymaga p4factory, któy wymaga hlira, któy wymaga pisze że jest przestarzały i zamiennikiem jest p4c a po call stacku widać że w nowszym p4c wymagana jest dependencja do starego hlir-a a którym są problemy z zainstalowaniem paczki, której nie ma w rejestrze pip
+
 ## Sprzątanie
 
 ```sh
