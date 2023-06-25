@@ -17,10 +17,11 @@ from p4runtime_lib.error_utils import printGrpcError
 from p4runtime_lib.switch import ShutdownAllSwitchConnections
 
 
-def writeTableEntry(p4info_helper, switch, port, dst_eth_addr, dst_ip_addr):
+def writeTableEntry(p4info_helper, switch, port: int, dst_eth_addr: str, dst_ip_addr: str):
 
     table_entry = p4info_helper.buildTableEntry(
-                #TODO Add table entry
+                #TODO 
+                #Add table entry
                 )
 
     switch.WriteTableEntry(table_entry)
